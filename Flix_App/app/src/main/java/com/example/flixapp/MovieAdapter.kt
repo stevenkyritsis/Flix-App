@@ -4,12 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
 
 class MovieAdapter(private val context: Context, private val movies: List<Movie>)
-    : RecyclerView.Adapter<ViewHolder>() {
+    : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,12 +28,12 @@ class MovieAdapter(private val context: Context, private val movies: List<Movie>
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvTitle = itemView.findViewById<TextView>(R.id.tvTitle)
         private val tvOverview = itemView.findViewById<TextView>(R.id.tvOverview)
-        private val ivPoster = itemView.findViewById<TextView>(R.id.ivPoster)
+        private val ivPoster = itemView.findViewById<ImageView>(R.id.ivPoster)
 
         fun bind(movie: Movie) {
             tvTitle.text = movie.title
             tvOverview.text = movie.overview
-            //TODO: populate imageview
+            Glide.with(context).load(movie.posterImageUrl).into(ivPoster)
         }
     }
 
